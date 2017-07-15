@@ -20,6 +20,7 @@ class CreateCreditsTable extends Migration
             $table->integer('fee');
             $table->integer('type');
             $table->string('start_at');
+            $table->integer('active');
             $table->timestamps();
         });
     }
