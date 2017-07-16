@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Credit;
 
 class Payment extends Model
 {
@@ -12,6 +13,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
+        'credit_id'
     	'value',
     	'date'
     ];
@@ -31,6 +33,6 @@ class Payment extends Model
      */
     public function credit()
     {
-        return $this->belongsTo('App\Credit');
+        return $this->belongsTo('Credit');
     }
 }

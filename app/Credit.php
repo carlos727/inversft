@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Client;
+use App\Payment;
 
 class Credit extends Model
 {
@@ -12,9 +14,11 @@ class Credit extends Model
      * @var array
      */
     protected $fillable = [
+        'client_id',
     	'value',
     	'fee',
     	'type',
+        'revenue',
     	'start_at',
     	'active'
     ];
@@ -34,7 +38,7 @@ class Credit extends Model
      */
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('Client');
     }
 
 	/**
@@ -42,6 +46,6 @@ class Credit extends Model
      */
     public function payments()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasMany('Payment');
     }
 }
