@@ -13,10 +13,7 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-    	'id',
-    	'name',
-    	'address',
-    	'phone'
+    	'id', 'name', 'address', 'phone',
     ];
 
     /**
@@ -25,8 +22,7 @@ class Client extends Model
 	* @var array
 	*/
 	protected $hidden = [
-		'created_at',
-		'updated_at'
+		'created_at', 'updated_at'
 	];
 
 	/**

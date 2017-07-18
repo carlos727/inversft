@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->integer('credit_id')->unsigned()->index();
             $table->integer('value');
-            $table->string('date');
+            $table->date('date');
             $table->timestamps();
         });
     }

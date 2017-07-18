@@ -43,15 +43,15 @@ class ClientController extends Controller
     public function store(Request $request)
     {
     	$validator = Validator::make($request->all(), [
-    		'id'		=>	'required',
-    		'name'		=>	'required',
-    		'address'	=>	'required',
-    		'phone'		=>	'required'
+    		'id'		=>	'required|integer',
+    		'name'		=>	'required|string',
+    		'address'	=>	'required|string',
+    		'phone'		=>	'required|integer'
     	]);
 
     	if ($validator->fails()) {
     		return redirect()
-    			->action('ClientController@show')
+    			->action('ClientController@create')
     			->withErrors($validator->errors());
     	}
 
@@ -62,7 +62,7 @@ class ClientController extends Controller
     	$client->phone	= $request->input('phone');
     	$client->save();
 
-    	return redirect()->action('CreditController@create');
+    	return redirect()->action('ClientController@show');
     }
 
     /**
@@ -81,7 +81,10 @@ class ClientController extends Controller
 		//
 	}
 
-	public function clientCredits($id)
+    /**
+     * Show the application index.
+     */
+	public function credits($id)
 	{
 		$credits = Client::findOrFail($id)->credits()->get();
 

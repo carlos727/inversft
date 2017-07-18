@@ -13,9 +13,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'credit_id'
-    	'value',
-    	'date'
+        'credit_id', 'value', 'date',
     ];
 
     /**
@@ -24,8 +22,7 @@ class Payment extends Model
 	* @var array
 	*/
 	protected $hidden = [
-		'created_at',
-		'updated_at'
+		'created_at', 'updated_at',
 	];
 
     /**

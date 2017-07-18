@@ -14,13 +14,7 @@ class Credit extends Model
      * @var array
      */
     protected $fillable = [
-        'client_id',
-    	'value',
-    	'fee',
-    	'type',
-        'revenue',
-    	'start_at',
-    	'active'
+        'client_id', 'value', 'fee', 'type', 'revenue', 'start_at', 'active',
     ];
 
     /**
@@ -29,8 +23,7 @@ class Credit extends Model
 	* @var array
 	*/
 	protected $hidden = [
-		'created_at',
-		'updated_at'
+		'created_at', 'updated_at'
 	];
 
 	/**

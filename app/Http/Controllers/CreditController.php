@@ -29,8 +29,7 @@ class CreditController extends Controller
         $credits = Credit::where('active', 1)->get();
 
     	return view('home',[
-    		'credits' => $credits,
-            'clients' => $clients
+    		'credits' => $credits
     	]);
     }
 
