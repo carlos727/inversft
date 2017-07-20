@@ -53,13 +53,12 @@ class CreditController extends Controller
     		'fee'		=>	'required',
     		'type'		=>	'required',
     		'revenue'	=>	'required',
-    		'start_at'	=>	'required',
-    		'active'	=>	'required'
+    		'start_at'	=>	'required'
     	]);
 
     	if ($validator->fails()) {
     		return redirect()
-    			->action('CreditController@index')
+    			->action('CreditController@create')
     			->withErrors($validator->errors());
     	}
 

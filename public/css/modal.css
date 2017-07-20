@@ -1,0 +1,16 @@
+.modal-title {
+	display: inline-block;
+	font-size: 30px;
+}
+
+.close {
+	font-size: 50px;
+}
+
+.modal-body p {
+	font-size: 20px;
+}
+
+.modal-footer .btn {
+	font-size: 20px;
+}

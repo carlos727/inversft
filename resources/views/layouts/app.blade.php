@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/modal.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/panel.css') }}"  media="screen,projection"/>
 </head>
 <body>
     <div id="app">
@@ -37,15 +40,15 @@
                     <!-- Left Side Of Navbar -->
                     @if (Auth::check())
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Cobro <span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="{{ route('home') }}">Cobro <span class="sr-only">(current)</span></a></li>
                             <li><a href="{{ route('clients') }}">Clientes</a></li>
                         </ul>
 
                         <form class="navbar-form navbar-left">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" placeholder="Buscar">
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">GO</button>
                         </form>
                     @endif
 

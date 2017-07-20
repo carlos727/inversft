@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'CreditController@index')->name('home');
+Route::get('/credit/create', 'CreditController@create')->name('create_credit');
+Route::post('/credit/store', 'CreditController@store')->name('credit');
 
 Route::get('/client/show', 'ClientController@show')->name('clients');
 Route::get('/client/create', 'ClientController@create')->name('create_client');

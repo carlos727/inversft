@@ -3,10 +3,15 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<a class="btn btn-primary" href="{{ route('create_client') }}">Nuevo Cliente</a>
+					<!-- <a class="btn btn-primary" href="{{ route('create_client') }}">Nuevo Cliente</a> -->
+					<h3><b>Clientes</b></h3>
+				</div>
+
+				<div class="panel-body">
+					Listado de todos los clientes que ha tenido la inversión
 				</div>
 
 				@if (count($clients) > 0)
@@ -20,7 +25,7 @@
 							</tr>
 						</thead>
 
-						<tbody>
+						<tbody id="tb-clt">
 							@foreach ($clients as $client)
 
 									<tr>

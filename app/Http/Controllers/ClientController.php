@@ -43,10 +43,10 @@ class ClientController extends Controller
     public function store(Request $request)
     {
     	$validator = Validator::make($request->all(), [
-    		'id'		=>	'required|integer',
-    		'name'		=>	'required|string',
-    		'address'	=>	'required|string',
-    		'phone'		=>	'required|integer'
+    		'id'		=>	'required|integer|unique:clients',
+    		'name'		=>	'required|string|max:50',
+    		'address'	=>	'required|string|max:50',
+    		'phone'		=>	'required|string|max:10'
     	]);
 
     	if ($validator->fails()) {
@@ -62,7 +62,7 @@ class ClientController extends Controller
     	$client->phone	= $request->input('phone');
     	$client->save();
 
-    	return redirect()->action('ClientController@show');
+    	return redirect()->route('create_credit');
     }
 
     /**

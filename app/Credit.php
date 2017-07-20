@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Client;
-use App\Payment;
 
 class Credit extends Model
 {
@@ -31,7 +29,7 @@ class Credit extends Model
      */
     public function client()
     {
-        return $this->belongsTo('Client');
+        return $this->belongsTo('App\Client');
     }
 
 	/**
@@ -39,6 +37,40 @@ class Credit extends Model
      */
     public function payments()
     {
-        return $this->hasMany('Payment');
+        return $this->hasMany('App\Payment');
+    }
+
+    /**
+     * Get total money to pay for the credit.
+     */
+    public function totalToPay()
+    {
+        return ($this->value * $this->revenue);
+    }
+
+    /**
+     * Get value of the fee.
+     */
+    public function fee()
+    {
+        $total = $this->totalToPay();
+        return ($total / $this->fee);
+    }
+
+    /**
+     * Get credit balance.
+     */
+    public function balance()
+    {
+        $total = $this->totalToPay();
+        $payments = $this->payments();
+        $sum = 0;
+
+        foreach ($payments as $payment)
+        {
+            $sum = $sum + $payment->value;
+        }
+
+        return ($total - $sum);
     }
 }
