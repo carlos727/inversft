@@ -16,12 +16,6 @@ tr:after {
 	clear: both;
 }
 
-thead th {
-	/*height: 30px;*/
-
-	/*text-align: left;*/
-}
-
 tbody {
 	height: 390px;
 	overflow-y: auto;
@@ -31,12 +25,7 @@ tbody {
 	height: 400px;
 }
 
-thead {
-	/* fallback */
-}
-
-
 tbody td, thead th {
-	width: 25%;
+	width: 20%;
 	float: left;
 }

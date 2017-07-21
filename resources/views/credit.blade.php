@@ -14,9 +14,14 @@
 							<label for="client_id" class="col-md-4 control-label">Cliente</label>
 
 							<div class="col-md-6">
-								<input id="client_id" type="text" class="form-control" name="client_id" value="{{ old('client_id') }}" required autofocus>
+								<select class="form-control" id="client_id" name="client_id">
+									<option value="" disabled selected>Seleccionar...</option>
+									@foreach ($clients as $client)
+										<option value="{{ $client->id }}">{{ $client->name }} ({{ $client->id }})</option>
+									@endforeach
+							    </select>
 
-								@if ($errors->has('client_id'))
+							    @if ($errors->has('client_id'))
 									<span class="help-block">
 										<strong>{{ $errors->first('client_id') }}</strong>
 									</span>
@@ -25,10 +30,11 @@
 						</div>
 
 						<div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
-							<label for="value" class="col-md-4 control-label">Préstamo</label>
+							<label for="value" class="col-md-4 control-label">Cantidad</label>
 
 							<div class="col-md-6">
-								<input id="value" type="text" class="form-control" name="value" value="{{ old('value') }}" required autofocus>
+								<input id="value" type="number" class="form-control" name="value" placeholder="50000" step="50000"
+								value="{{ old('value') }}" required autofocus>
 
 								@if ($errors->has('value'))
 									<span class="help-block">
@@ -42,7 +48,7 @@
 							<label for="fee" class="col-md-4 control-label">No. de cuotas</label>
 
 							<div class="col-md-6">
-								<input fee="fee" type="fee" class="form-control" name="fee" value="{{ old('fee') }}" required autofocus>
+								<input id="fee" type="number" class="form-control" name="fee" placeholder="30" value="{{ old('fee') }}" required autofocus>
 
 								@if ($errors->has('fee'))
 									<span class="help-block">
@@ -56,7 +62,13 @@
 							<label for="type" class="col-md-4 control-label">Tipo</label>
 
 							<div class="col-md-6">
-								<input id="type" type="text" class="form-control" name="type" value="{{old('type')}}" required autofocus>
+								<select id="type" class="form-control" name="type">
+									<option value="" disabled selected>Seleccionar...</option>
+									<option value="0">Diario</option>
+									<option value="1">Semanal</option>
+									<option value="2">Quincenal</option>
+									<option value="3">Mensual</option>
+								</select>
 
 								@if ($errors->has('type'))
 									<span class="help-block">
@@ -70,7 +82,7 @@
 							<label for="revenue" class="col-md-4 control-label">Rédito</label>
 
 							<div class="col-md-6">
-								<input id="revenue" type="text" class="form-control" name="revenue" value="{{ old('revenue') }}" required autofocus>
+								<input id="revenue" type="number" class="form-control" name="revenue" placeholder="20" value="{{ old('revenue')}}" required autofocus>
 
 								@if ($errors->has('revenue'))
 									<span class="help-block">
@@ -84,7 +96,7 @@
 							<label for="start_at" class="col-md-4 control-label">Fecha</label>
 
 							<div class="col-md-6">
-								<input id="start_at" type="text" class="form-control" name="start_at" value="{{ old('start_at') }}" required autofocus>
+								<input id="start_at" type="date" class="form-control" name="start_at" value="{{ old('start_at') }}" required autofocus>
 
 								@if ($errors->has('start_at'))
 									<span class="help-block">

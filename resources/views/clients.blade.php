@@ -22,6 +22,7 @@
 								<th data-field="id">Cedula</th>
 								<th data-field="address">Dirección</th>
 								<th data-field="phone">Celular</th>
+								<th data-field="operation">Operaciones</th>
 							</tr>
 						</thead>
 
@@ -33,6 +34,7 @@
 										<td><div>{{ $client->id }}</div></td>
 										<td><div>{{ $client->address }}</div></td>
 										<td><div>{{ $client->phone }}</div></td>
+										<td><div></div></td>
 									</tr>
 
 							@endforeach

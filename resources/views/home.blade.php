@@ -42,6 +42,7 @@
 								<th data-field="address">Dirección</th>
 								<th data-field="fee">Cuota</th>
 								<th data-field="">Saldo</th>
+								<th data-field="operation">Operaciones</th>
 							</tr>
 						</thead>
 
@@ -51,8 +52,9 @@
 								<tr>
 									<td><div>{{ $credit->client->name }}</div></td>
 									<td><div>{{ $credit->client->address }}</div></td>
-									<td><div>{{ $credit->fee() }}</div></td>
+									<td><div>{{ $credit->fee_val() }}</div></td>
 									<td><div>{{ $credit->balance() }}</div></td>
+									<td><div></div></td>
 								</tr>
 
 							@endforeach
