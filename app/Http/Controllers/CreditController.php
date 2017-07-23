@@ -26,19 +26,15 @@ class CreditController extends Controller
      */
     public function index()
     {
-        $credits = Credit::where('active', 1)->get();
-
     	return view('home',[
-    		'credits' => $credits
+    		'credits' => Credit::where('active', 1)->get()
     	]);
     }
 
     public function create()
     {
-        $clients = Client::orderBy('name', 'asc')->get();
-
         return view('credit',[
-            'clients' => $clients
+            'clients' => Client::orderBy('name', 'asc')->get()
         ]);
     }
 
@@ -47,18 +43,21 @@ class CreditController extends Controller
      */
     public function store(Request $request)
     {
+        $regex = "/^\d+((\.|\,)\d+)?$/";
+
     	$validator = Validator::make($request->all(), [
-            'client_id' =>  'required',
-    		'value'		=>	'required',
-    		'fee'		=>	'required',
-    		'type'		=>	'required',
-    		'revenue'	=>	'required',
-    		'start_at'	=>	'required'
+            'client_id' =>  'required|numeric|min:1',
+    		'value'		=>	'required|numeric|min:1',
+    		'fee'		=>	'required|numeric|min:1',
+    		'type'		=>	'required|numeric|min:0|max:3',
+    		'revenue'	=>	'required|numeric',//|regex:'.$regex,
+    		'start_at'	=>	'required|date'
     	]);
 
     	if ($validator->fails()) {
     		return redirect()
     			->action('CreditController@create')
+                ->withInput()
     			->withErrors($validator->errors());
     	}
 
@@ -69,10 +68,9 @@ class CreditController extends Controller
     	$credit->type		= $request->input('type');
     	$credit->revenue	= $request->input('revenue');
     	$credit->start_at	= $request->input('start_at');
-    	$credit->active		= 1;
     	$credit->save();
 
-    	return redirect()->action('CreditController@index');
+    	return redirect()->action('CreditController@index')->with('message', 'Exito: Crédito creado!');
     }
 
     /**
@@ -80,7 +78,15 @@ class CreditController extends Controller
      */
     public function delete($id)
     {
-		//
+        $count = Credit::findOrFail($id)->payments->count();
+
+        if ($count == 0) {
+            Credit::findOrFail($id)->delete();
+            return redirect()->action('CreditController@index')->with('message', 'Exito: Crédito eliminado!');
+        }
+        else {
+            return redirect()->action('CreditController@index')->with('alert', 'Error: El crédito tiene pagos asociados.');
+        }
 	}
 
 	/**

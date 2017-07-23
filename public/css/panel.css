@@ -1,8 +1,3 @@
-.panel-heading h3 {
-	margin: 0;
-	padding: 0;
-}
-
 table {
 	width: 100%;
 }
@@ -21,11 +16,20 @@ tbody {
 	overflow-y: auto;
 }
 
-#tb-clt {
-	height: 400px;
-}
-
 tbody td, thead th {
 	width: 20%;
 	float: left;
+}
+
+.panel-heading h3 {
+	margin: 0;
+	padding: 0;
+}
+
+.modal-footer form {
+	display: inline-block;
+}
+
+#tb-clt {
+	height: 400px;
 }

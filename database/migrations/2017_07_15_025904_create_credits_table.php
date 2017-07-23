@@ -16,12 +16,12 @@ class CreateCreditsTable extends Migration
         Schema::create('credits', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->unsigned()->index();
-            $table->integer('value');
-            $table->integer('fee');
-            $table->integer('type');
-            $table->double('revenue');
+            $table->integer('value')->unsigned();
+            $table->integer('fee')->unsigned();
+            $table->integer('type')->unsigned();
+            $table->double('revenue')->unsigned();
             $table->date('start_at');
-            $table->integer('active');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

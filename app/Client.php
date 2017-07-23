@@ -28,7 +28,7 @@ class Client extends Model
 	/**
      * Get all of the credits for the client.
      */
-    public function credit()
+    public function credits()
     {
         return $this->hasMany('Credit');
     }

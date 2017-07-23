@@ -7,7 +7,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Nuevo Cliente</div>
 				<div class="panel-body">
-					<form class="form-horizontal" method="POST" action="{{ route('client') }}">
+					<form class="form-horizontal" method="POST" action="{{ route('store_client') }}">
 						{{ csrf_field() }}
 
 						<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Credit;
 
 class Payment extends Model
 {
@@ -30,6 +29,6 @@ class Payment extends Model
      */
     public function credit()
     {
-        return $this->belongsTo('Credit');
+        return $this->belongsTo('App\Credit');
     }
 }

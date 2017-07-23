@@ -6,7 +6,8 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<!-- <a class="btn btn-primary" href="{{ route('create_client') }}">Nuevo Cliente</a> -->
+					@include('common.message')
+					
 					<h3><b>Clientes</b></h3>
 				</div>
 
@@ -34,7 +35,11 @@
 										<td><div>{{ $client->id }}</div></td>
 										<td><div>{{ $client->address }}</div></td>
 										<td><div>{{ $client->phone }}</div></td>
-										<td><div></div></td>
+										<td>
+											<div>
+												@include('button.delete_obj',['id' => $client->id,'route' => 'delete_client','obj' => 'cliente'])
+											</div>
+										</td>
 									</tr>
 
 							@endforeach

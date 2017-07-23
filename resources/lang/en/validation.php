@@ -104,6 +104,19 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+    /*
+        'date'  => 'Fecha no valida.',
+        'max'   => [
+            'string'  => 'El campo :attribute no debe tener mas de :max caracteres.',
+        ],
+        'min'   => [
+            'numeric' => 'El :attribute debe ser un numero positivo.'
+        ],
+        'numeric'   => 'El campo :attribute solo acepta numeros.',
+        'regex'     => 'El redito no es un valor correcto',
+        'required'  => 'El campo :attribute es obligatorio.',
+        'unique'    => 'El :attribute ya esta siendo usado.',
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -116,6 +129,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'id'        => 'cédula',
+        'name'      => 'nombre',
+        'address'   => 'dirección',
+        'phone'     => 'teléfono',
+        'client_id' => 'cliente',
+        'value'     => 'cantidad',
+        'fee'       => 'cuotas',
+        'type'      => 'tipo',
+        'revenue'   => 'rédito',
+        'start_at'  => 'fecha',
+        'date'      => 'fecha',
+    ],
 
 ];

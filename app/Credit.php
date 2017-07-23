@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
 
 class Credit extends Model
 {
@@ -57,6 +59,14 @@ class Credit extends Model
     }
 
     /**
+     * Get total money paid for the credit.
+     */
+    public function total_paid()
+    {
+        return $this->payments->sum('value');
+    }
+
+    /**
      * Get value of the fee.
      */
     public function fee_val()
@@ -69,14 +79,6 @@ class Credit extends Model
      */
     public function balance()
     {
-        $payments = $this->payments;
-        $sum = 0;
-
-        foreach ($payments as $payment)
-        {
-            $sum = $sum + $payment->value;
-        }
-
-        return $this->total_to_pay() - $sum;
+        return $this->total_to_pay() - $this->total_paid();
     }
 }
