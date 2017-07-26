@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pay{{ $credit->id }}">P</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#pay{{ $credit->id }}">P</button>
 
 <div class="modal fade" id="pay{{ $credit->id }}" tabindex="-1" role="dialog"
 aria-labelledby="DeleteModalLabel" aria-hidden="true">
@@ -49,6 +49,7 @@ aria-labelledby="DeleteModalLabel" aria-hidden="true">
 					<div class="form-group">
 						<div class="col-md-6 col-md-offset-4">
 							<button type="submit" class="btn btn-primary">Guardar</button>
+							<button type="submit" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						</div>
 					</div>
 				</form>

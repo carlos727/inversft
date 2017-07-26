@@ -45,7 +45,7 @@ class PaymentController extends Controller
 			'date'		=>	'required|date'
 		]);
 
-		$validator->after(function($validator) {
+		$validator->after(function ($validator) {
 
 			$credit_id = array_get($validator->getData(), 'credit_id', null);
 			$date = date('Y-m-d', strtotime(array_get($validator->getData(), 'date', null)));

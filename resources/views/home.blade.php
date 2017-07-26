@@ -40,8 +40,8 @@
 									<td><div>{{ $credit->balance() }}</div></td>
 									<td>
 										<div>
-											@include('button.delete_obj',['id' => $credit->id,'route' => 'delete_credit','obj' => 'crédito'])
-
+											@include('button.delete_obj', ['id' => $credit->id,'route' => 'delete_credit','obj' => 'crédito'])
+											@include('button.update_credit', ['credit' => $credit, 'clients' => $clients])
 											@include('button.pay_credit', ['credit' => $credit])
 										</div>
 									</td>

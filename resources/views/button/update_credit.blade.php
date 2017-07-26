@@ -1,20 +1,22 @@
-@extends('layouts.app')
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update{{ $credit->id }}">A</button>
 
-@section('content')
-<div class="container">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					@include('common.message')
+<div class="modal fade" id="update{{ $credit->id }}" tabindex="-1" role="dialog"
+aria-labelledby="DeleteModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Actualizar datos</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 
-					Nuevo Crédito
-				</div>
-				<div class="panel-body">
-					<form class="form-horizontal" method="POST" action="{{ route('store_credit') }}">
-						{{ csrf_field() }}
+			<div class="modal-body">
+				<form class="form-horizontal" method="POST" action="{{ route('update_credit', ['id' => $credit->id]) }}">
+					{{ csrf_field() }}
+					{{ method_field('PUT') }}
 
-						<div class="form-group{{ $errors->has('client_id') ? ' has-error' : '' }}">
+					<div class="form-group{{ $errors->has('client_id') ? ' has-error' : '' }}">
 							<label for="client_id" class="col-md-4 control-label">Cliente</label>
 
 							<div class="col-md-6">
@@ -37,7 +39,7 @@
 							<label for="value" class="col-md-4 control-label">Cantidad</label>
 
 							<div class="col-md-6">
-								<input id="value" type="number" class="form-control" name="value" placeholder="50000" step="50000"
+								<input id="value" type="number" class="form-control" name="value" placeholder="{{ $credit->value }}" step="50000"
 								value="{{ old('value') }}" required autofocus>
 
 								@if ($errors->has('value'))
@@ -52,7 +54,7 @@
 							<label for="fee" class="col-md-4 control-label">No. de cuotas</label>
 
 							<div class="col-md-6">
-								<input id="fee" type="number" class="form-control" name="fee" placeholder="30" value="{{ old('fee') }}" required autofocus>
+								<input id="fee" type="number" class="form-control" name="fee" placeholder="{{ $credit->fee }}" value="{{ old('fee') }}" required autofocus>
 
 								@if ($errors->has('fee'))
 									<span class="help-block">
@@ -86,7 +88,8 @@
 							<label for="revenue" class="col-md-4 control-label">Rédito</label>
 
 							<div class="col-md-6">
-								<input id="revenue" type="number" class="form-control" name="revenue" placeholder="20" value="{{ old('revenue')}}" required autofocus>
+								<input id="revenue" type="number" class="form-control" name="revenue" placeholder="{{ $credit->revenue }}"
+								value="{{ old('revenue')}}" required autofocus>
 
 								@if ($errors->has('revenue'))
 									<span class="help-block">
@@ -100,8 +103,7 @@
 							<label for="start_at" class="col-md-4 control-label">Fecha</label>
 
 							<div class="col-md-6">
-								<input id="start_at" type="date" class="form-control" name="start_at"
-								value="{{ Carbon\Carbon::now()->toDateString() }}" required autofocus>
+								<input id="start_at" type="date" class="form-control" name="start_at" value="{{ $credit->start_at }}" required autofocus>
 
 								@if ($errors->has('start_at'))
 									<span class="help-block">
@@ -111,15 +113,14 @@
 							</div>
 						</div>
 
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">Guardar</button>
-							</div>
+					<div class="form-group">
+						<div class="col-md-6 col-md-offset-4">
+							<button type="submit" class="btn btn-primary">Guardar</button>
+							<button type="submit" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
-@endsection

@@ -12,8 +12,8 @@
 				<p>¿Esta es la primera vez que el deudor solicita un préstamo?</p>
 			</div>
 			<div class="modal-footer">
-				<a href="{{ route('create_client') }}" class="btn btn-primary">Si</a>
 				<a href="{{ route('create_credit') }}" class="btn btn-default">No</a>
+				<a href="{{ route('create_client') }}" class="btn btn-primary">Si</a>
 			</div>
 		</div>
 	</div>

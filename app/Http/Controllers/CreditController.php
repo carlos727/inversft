@@ -27,7 +27,8 @@ class CreditController extends Controller
     public function index()
     {
     	return view('home',[
-    		'credits' => Credit::where('active', 1)->get()
+    		'credits' => Credit::where('active', 1)->get(),
+            'clients' => Client::all()
     	]);
     }
 
@@ -49,7 +50,7 @@ class CreditController extends Controller
             'client_id' =>  'required|numeric|min:1',
     		'value'		=>	'required|numeric|min:1',
     		'fee'		=>	'required|numeric|min:1',
-    		'type'		=>	'required|numeric|min:0|max:3',
+    		'type'		=>	'required|digits_between:0,3',
     		'revenue'	=>	'required|numeric',//|regex:'.$regex,
     		'start_at'	=>	'required|date'
     	]);
@@ -94,6 +95,40 @@ class CreditController extends Controller
      */
 	public function update($id, Request $request)
     {
-		//
+        $credit = Credit::findOrFail($id);
+
+        if ($credit->payments->count() == 0) {
+            
+            $regex = "/^\d+((\.|\,)\d+)?$/";
+
+            $validator = Validator::make($request->all(), [
+                'client_id' =>  'required|numeric|min:1',
+                'value'     =>  'required|numeric|min:1',
+                'fee'       =>  'required|numeric|min:1',
+                'type'      =>  'required|digits_between:0,3',
+                'revenue'   =>  'required|numeric',//|regex:'.$regex,
+                'start_at'  =>  'required|date'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()
+                    ->action('CreditController@create')
+                    ->withInput()
+                    ->withErrors($validator->errors());
+            }
+
+            $credit->client_id  = $request->input('client_id');
+            $credit->value      = $request->input('value');
+            $credit->fee        = $request->input('fee');
+            $credit->type       = $request->input('type');
+            $credit->revenue    = $request->input('revenue');
+            $credit->start_at   = $request->input('start_at');
+            $credit->save();
+
+            return redirect()->action('CreditController@index')->with('message', 'Exito: Datos del crédito actualizados!');
+        }
+		else {
+            return redirect()->action('CreditController@index')->with('alert', 'Error: El crédito tiene pagos asociados.');
+        }
 	}
 }

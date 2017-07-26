@@ -47,6 +47,16 @@ class ClientController extends Controller
 			'phone'		=>	'required|numeric'
 		]);
 
+		$validator->after(function ($validator) {
+
+			$phone = array_get($validator->getData(), 'phone', null);
+
+			if (!(strlen($phone) == 7 || strlen($phone) == 10)) {
+				$validator->errors()->add('phone', 'Formato de numero telefonico incorrecto.');
+			}
+
+		});
+
 		if ($validator->fails()) {
 			return redirect()
 				->action('ClientController@create')
@@ -85,7 +95,35 @@ class ClientController extends Controller
 	 */
 	public function update($id, Request $request)
 	{
-		//
+		$client = Client::findOrFail($id);
+
+		$validator = Validator::make($request->all(), [
+			'address'	=>	'required|string|max:50',
+			'phone'		=>	'required|numeric'
+		]);
+
+		$validator->after(function ($validator) {
+
+			$phone = array_get($validator->getData(), 'phone', null);
+
+			if (!(strlen($phone) == 7 || strlen($phone) == 10)) {
+				$validator->errors()->add('phone', 'Formato de numero telefonico incorrecto.');
+			}
+
+		});
+
+		if ($validator->fails()) {
+			return redirect()
+				->action('ClientController@show')
+				->withInput()
+				->withErrors($validator->errors());
+		}
+
+		$client->address= $request->input('address');
+		$client->phone	= $request->input('phone');
+		$client->save();
+
+		return redirect()->route('clients')->with('message', 'Exito: Datos del cliente actualizados!');
 	}
 
 	/**
@@ -93,7 +131,7 @@ class ClientController extends Controller
 	 */
 	public function credits($id)
 	{
-		$credits = Client::findOrFail($id)->credits()->get();
+		$credits = Client::findOrFail($id)->credits;
 
 		return view('credits', [
 			'credits' => $credits

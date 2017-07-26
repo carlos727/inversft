@@ -7,7 +7,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					@include('common.message')
-					
+					@include('common.errors')
 					<h3><b>Clientes</b></h3>
 				</div>
 
@@ -38,6 +38,7 @@
 										<td>
 											<div>
 												@include('button.delete_obj',['id' => $client->id,'route' => 'delete_client','obj' => 'cliente'])
+												@include('button.update_client', ['client' => $client])
 											</div>
 										</td>
 									</tr>
