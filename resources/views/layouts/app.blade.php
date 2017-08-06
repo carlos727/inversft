@@ -41,7 +41,7 @@
                     @if (Auth::check())
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="{{ route('home') }}">Cobro <span class="sr-only">(current)</span></a></li>
-                            <li><a href="{{ route('clients') }}">Clientes</a></li>
+                            <li><a href="{{ route('list_clients') }}">Clientes</a></li>
                         </ul>
 
                         <form class="navbar-form navbar-left">

@@ -18,12 +18,24 @@
 							<label for="client_id" class="col-md-4 control-label">Cliente</label>
 
 							<div class="col-md-6">
-								<select class="form-control" id="client_id" name="client_id">
-									<option value="" disabled selected>Seleccionar...</option>
-									@foreach ($clients as $client)
-										<option value="{{ $client->id }}">{{ $client->name }} ({{ $client->id }})</option>
-									@endforeach
-							    </select>
+								@if (Session::has('id'))
+									<select class="form-control" id="client_id" name="client_id">
+										@foreach ($clients as $client)
+											@if (Session::get('id') == $client->id)
+												<option value="{{ $client->id }}" selected>{{ $client->name }} ({{ $client->id }})</option>
+											@else
+												<option value="{{ $client->id }}">{{ $client->name }} ({{ $client->id }})</option>
+											@endif
+										@endforeach
+									</select>
+								@else
+									<select class="form-control" id="client_id" name="client_id">
+										<option value="" disabled selected>Seleccionar...</option>
+										@foreach ($clients as $client)
+											<option value="{{ $client->id }}">{{ $client->name }} ({{ $client->id }})</option>
+										@endforeach
+									</select>
+								@endif
 
 							    @if ($errors->has('client_id'))
 									<span class="help-block">
@@ -86,7 +98,7 @@
 							<label for="revenue" class="col-md-4 control-label">Rédito</label>
 
 							<div class="col-md-6">
-								<input id="revenue" type="number" class="form-control" name="revenue" placeholder="20" value="{{ old('revenue')}}" required autofocus>
+								<input id="revenue" type="number" class="form-control" name="revenue" placeholder="20" value="20" required autofocus>
 
 								@if ($errors->has('revenue'))
 									<span class="help-block">

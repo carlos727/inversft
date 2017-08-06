@@ -100,9 +100,32 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'id' => [
+            'numeric'   => 'La cedula debe ser un numero.',
+            'min'       => 'La cedula debe ser un numero positivo.',
+            'required'  => 'La cedula es obligatoria.',
+            'unique'    => 'Esta cedula ya existe en la base de datos.',
         ],
+        'name' => [
+            'max'       => 'El nombre no debe tener mas de :max caracteres.',
+            'required'  => 'El nombre es obligatorio.',
+        ],
+        'address' => [
+            'max'       => 'La dirección no debe tener mas de :max caracteres.',
+            'required'  => 'La dirección es obligatoria.',
+        ],
+        'phone' => [
+            'numeric'   => 'La teléfono debe ser un numero.',
+            'required'  => 'El teléfono es obligatorio.',
+        ],
+        'start_at' => [
+            'date'      => 'Fecha no valida.',
+            'required'  => 'El campo :attribute es obligatorio.',
+        ],
+        'date' => [
+            'date' => 'Fecha no valida.',
+        ],
+        
     ],
     /*
         'date'  => 'Fecha no valida.',

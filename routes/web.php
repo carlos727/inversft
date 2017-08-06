@@ -35,7 +35,7 @@ Route::put('/credit/update/{id}', 'CreditController@update')->name('update_credi
 /**
  * Client routes
  */
-Route::get('/client/show', 'ClientController@show')->name('clients');
+Route::get('/client/show', 'ClientController@show')->name('list_clients');
 Route::get('/client/create', 'ClientController@create')->name('create_client');
 Route::post('/client/store', 'ClientController@store')->name('store_client');
 Route::delete('/client/delete/{id}', 'ClientController@delete')->name('delete_client');

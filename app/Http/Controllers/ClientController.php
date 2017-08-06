@@ -25,14 +25,14 @@ class ClientController extends Controller
 	 */
 	public function show()
 	{
-		return view('clients',[
+		return view('client_list',[
 			'clients' => Client::orderBy('name', 'asc')->get()
 		]);
 	}
 
 	public function create()
 	{
-		return view('client');
+		return view('client_create');
 	}
 
 	/**
@@ -71,7 +71,7 @@ class ClientController extends Controller
 		$client->phone	= $request->input('phone');
 		$client->save();
 
-		return redirect()->route('create_credit')->with('message', 'Exito: Cliente creado!');
+		return redirect()->route('create_credit')->with('success', 'Exito: Cliente creado!')->with('id', intval($request->input('id')));
 	}
 
 	/**
@@ -83,10 +83,10 @@ class ClientController extends Controller
 
 		if ($count == 0) {
 			Client::findOrFail($id)->delete();
-			return redirect()->action('ClientController@show')->with('message', 'Exito: Cliente eliminado!');
+			return redirect()->action('ClientController@show')->with('success', 'Exito: Cliente eliminado!');
 		}
 		else {
-			return redirect()->action('ClientController@show')->with('alert', 'Error: El cliente tiene creditos asociados.');
+			return redirect()->action('ClientController@show')->with('warning', 'Alerta: El cliente tiene creditos asociados.');
 		}
 	}
 
@@ -123,18 +123,16 @@ class ClientController extends Controller
 		$client->phone	= $request->input('phone');
 		$client->save();
 
-		return redirect()->route('clients')->with('message', 'Exito: Datos del cliente actualizados!');
+		return redirect()->route('clients')->with('success', 'Exito: Datos del cliente actualizados!');
 	}
 
 	/**
-	 *
+	 * Credit history of a client
 	 */
 	public function credits($id)
 	{
-		$credits = Client::findOrFail($id)->credits;
-
-		return view('credits', [
-			'credits' => $credits
+		return view('client_credits', [
+			'credits' => Client::findOrFail($id)->credits
 		]);
 	}
 }

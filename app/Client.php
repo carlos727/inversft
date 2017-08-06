@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Credit;
 
 class Client extends Model
 {
@@ -30,6 +29,6 @@ class Client extends Model
      */
     public function credits()
     {
-        return $this->hasMany('Credit');
+        return $this->hasMany('App\Credit');
     }
 }
