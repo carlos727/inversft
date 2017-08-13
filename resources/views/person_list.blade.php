@@ -8,14 +8,14 @@
 				<div class="panel-heading">
 					@include('common.message')
 					@include('common.errors')
-					<h3><b>Clientes</b></h3>
+					<h3><b>{{ ucfirst($person) }}</b></h3>
 				</div>
 
 				<div class="panel-body">
-					Listado de todos los clientes que ha tenido la inversión
+					Listado de todos los {{ $person }} que ha tenido la inversión
 				</div>
 
-				@if (count($clients) > 0)
+				@if (count($people) > 0)
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -28,17 +28,22 @@
 						</thead>
 
 						<tbody id="tb-clt">
-							@foreach ($clients as $client)
+							@foreach ($people as $p)
 
 									<tr>
-										<td><div>{{ $client->name }}</div></td>
-										<td><div>{{ $client->id }}</div></td>
-										<td><div>{{ $client->address }}</div></td>
-										<td><div>{{ $client->phone }}</div></td>
+										<td><div>{{ $p->name }}</div></td>
+										<td><div>{{ $p->id }}</div></td>
+										<td><div>{{ $p->address }}</div></td>
+										<td><div>{{ $p->phone }}</div></td>
 										<td>
 											<div>
-												@include('button.delete_obj',['id' => $client->id,'route' => 'delete_client','obj' => 'cliente'])
-												@include('button.update_client', ['client' => $client])
+												@if ($person == 'Clientes')
+													@include('common.delete_obj',['id' => $p->id, 'route' => 'delete_client', 'obj' => 'cliente'])
+													@include('common.update_per', ['person' => $p, 'route' => 'update_client'])
+												@else
+													@include('common.delete_obj',['id' => $p->id, 'route' => 'delete_collector', 'obj' => 'cobrador'])
+													@include('common.update_per', ['person' => $p, 'route' => 'update_collector'])
+												@endif
 											</div>
 										</td>
 									</tr>

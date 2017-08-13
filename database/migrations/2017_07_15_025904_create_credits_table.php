@@ -16,6 +16,7 @@ class CreateCreditsTable extends Migration
         Schema::create('credits', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->unsigned()->index();
+            $table->integer('collector_id')->unsigned()->index();
             $table->integer('value')->unsigned();
             $table->integer('fee')->unsigned();
             $table->integer('type')->unsigned();

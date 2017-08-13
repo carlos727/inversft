@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
-use App\Client;
+use App\Collector;
 use Validator;
 
-class ClientController extends Controller
+class CollectorController extends Controller
 {
-	/**
+    /**
 	 * Create a new controller instance.
 	 *
 	 * @return void
@@ -21,21 +21,21 @@ class ClientController extends Controller
 	}
 
 	/**
-	 * Show client list.
+	 * Show collector list.
 	 */
 	public function show()
 	{
 		return view('person_list',[
-			'person' => 'clientes',
-			'people' => Client::orderBy('name', 'asc')->get()
+			'person' => 'cobradores',
+			'people' => Collector::orderBy('name', 'asc')->get()
 		]);
 	}
 
 	public function create()
 	{
 		return view('create_person', [
-			'route' => 'store_client',
-			'person' => 'Cliente'
+			'route' => 'store_collector',
+			'person' => 'Cobrador'
 		]);
 	}
 
@@ -63,19 +63,19 @@ class ClientController extends Controller
 
 		if ($validator->fails()) {
 			return redirect()
-				->action('ClientController@create')
+				->action('CollectorController@create')
 				->withInput()
 				->withErrors($validator->errors());
 		}
 
-		$client = new Client;
+		$client = new Collector;
 		$client->id 	= $request->input('id');
 		$client->name	= $request->input('name');
 		$client->address= $request->input('address');
 		$client->phone	= $request->input('phone');
 		$client->save();
 
-		return redirect()->route('create_credit')->with('success', 'Exito: Cliente creado!')->with('id', intval($request->input('id')));
+		return redirect()->route('list_collectors')->with('success', 'Exito: Cobrador creado!')->with('id', intval($request->input('id')));
 	}
 
 	/**
@@ -83,14 +83,14 @@ class ClientController extends Controller
 	 */
 	public function delete($id)
 	{
-		$count = Client::findOrFail($id)->credits->count();
+		$count = Collector::findOrFail($id)->credits->count();
 
 		if ($count == 0) {
-			Client::findOrFail($id)->delete();
-			return redirect()->action('ClientController@show')->with('success', 'Exito: Cliente eliminado!');
+			Collector::findOrFail($id)->delete();
+			return redirect()->action('CollectorController@show')->with('success', 'Exito: Cobrador eliminado!');
 		}
 		else {
-			return redirect()->action('ClientController@show')->with('warning', 'Alerta: El cliente tiene creditos asociados.');
+			return redirect()->action('CollectorController@show')->with('warning', 'Alerta: El cobrador tiene creditos asociados.');
 		}
 	}
 
@@ -99,7 +99,7 @@ class ClientController extends Controller
 	 */
 	public function update($id, Request $request)
 	{
-		$client = Client::findOrFail($id);
+		$client = collector::findOrFail($id);
 
 		$validator = Validator::make($request->all(), [
 			'address'	=>	'required|string|max:50',
@@ -118,7 +118,7 @@ class ClientController extends Controller
 
 		if ($validator->fails()) {
 			return redirect()
-				->action('ClientController@show')
+				->action('CollectorController@show')
 				->withInput()
 				->withErrors($validator->errors());
 		}
@@ -127,7 +127,7 @@ class ClientController extends Controller
 		$client->phone	= $request->input('phone');
 		$client->save();
 
-		return redirect()->route('list_clients')->with('success', 'Exito: Datos del cliente actualizados!');
+		return redirect()->route('list_collectors')->with('success', 'Exito: Datos del cobrador actualizados!');
 	}
 
 	/**
@@ -136,7 +136,7 @@ class ClientController extends Controller
 	public function credits($id)
 	{
 		return view('credits', [
-			'credits' => Client::findOrFail($id)->credits
+			'credits' => Collector::findOrFail($id)->credits
 		]);
 	}
 }

@@ -14,6 +14,25 @@
 					<form class="form-horizontal" method="POST" action="{{ route('store_credit') }}">
 						{{ csrf_field() }}
 
+						<div class="form-group{{ $errors->has('collector_id') ? ' has-error' : '' }}">
+							<label for="collector_id" class="col-md-4 control-label">Cobrador</label>
+
+							<div class="col-md-6">
+								<select class="form-control" id="collector_id" name="collector_id">
+									<option value="" disabled selected>Seleccionar...</option>
+									@foreach ($collectors as $collector)
+										<option value="{{ $collector->id }}">{{ $collector->name }}</option>
+									@endforeach
+								</select>
+
+							    @if ($errors->has('collector_id'))
+									<span class="help-block">
+										<strong>{{ $errors->first('collector_id') }}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+
 						<div class="form-group{{ $errors->has('client_id') ? ' has-error' : '' }}">
 							<label for="client_id" class="col-md-4 control-label">Cliente</label>
 

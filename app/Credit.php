@@ -14,7 +14,7 @@ class Credit extends Model
      * @var array
      */
     protected $fillable = [
-        'client_id', 'value', 'fee', 'type', 'revenue', 'start_at', 'active',
+        'client_id', 'collector_id', 'value', 'fee', 'type', 'revenue', 'start_at', 'active',
     ];
 
     /**
@@ -32,6 +32,14 @@ class Credit extends Model
     public function client()
     {
         return $this->belongsTo('App\Client');
+    }
+
+    /**
+     * Get the collector related to the credit.
+     */
+    public function collector()
+    {
+        return $this->belongsTo('App\Collector');
     }
 
 	/**

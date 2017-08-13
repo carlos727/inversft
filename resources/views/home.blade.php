@@ -6,7 +6,9 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					@include('button.new_credit')
+					@include('button.credit.new')
+
+					<a href="{{ route('create_collector') }}" class="btn btn-success">Nuevo Cobrador</a>
 				</div>
 
 				<div class="panel-body">
@@ -40,9 +42,9 @@
 									<td><div>{{ $credit->balance() }}</div></td>
 									<td>
 										<div>
-											@include('button.delete_obj', ['id' => $credit->id,'route' => 'delete_credit','obj' => 'crédito'])
-											@include('button.update_credit', ['credit' => $credit, 'clients' => $clients])
-											@include('button.pay_credit', ['credit' => $credit])
+											@include('common.delete_obj', ['id' => $credit->id,'route' => 'delete_credit','obj' => 'crédito'])
+											@include('button.credit.update', ['credit' => $credit, 'clients' => $clients])
+											@include('button.credit.pay', ['credit' => $credit])
 										</div>
 									</td>
 								</tr>
