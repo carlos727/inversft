@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 
 use App\Http\Requests;
 use App\Payment;
+use App\Credit;
 
 use Validator;
 
@@ -25,12 +26,11 @@ class PaymentController extends Controller
 	/**
 	 * Show the application index.
 	 */
-	public function show($id)
+	public function show()
 	{
-		$payments = Payment::where('credit_id', $id)->get();
-
 		return view('payments',[
-			'payments' => $payments
+			'navbar' => ['', '', ''],
+			'payments' => Payment::all()//where('credit_id', $id)->get()
 		]);
 	}
 
@@ -75,13 +75,18 @@ class PaymentController extends Controller
 				->withErrors($validator->errors());
 		}
 
-		$payment = new Payment;
-		$payment->credit_id	= $request->input('credit_id');
-		$payment->value 	= $request->input('value');
-		$payment->date		= $request->input('date');
-		$payment->save();
+		if (Credit::find(intval($request->input('credit_id')))->balance() >= intval($request->input('value'))) {
+			$payment = new Payment;
+			$payment->credit_id	= $request->input('credit_id');
+			$payment->value 	= $request->input('value');
+			$payment->date		= $request->input('date');
+			$payment->save();
+		}
+		else {
+			return redirect()->route('home')->withInput()->with('alert', 'Error: El valor de la cuota supera el saldo de la deuda!');
+		}
 
-		return redirect()->action('CreditController@index');
+		return redirect()->action('CreditController@status', ['id' => intval($request->input('credit_id'))]);
 	}
 
 	/**
@@ -89,7 +94,9 @@ class PaymentController extends Controller
 	 */
 	public function delete($id)
 	{
-		//
+		Payment::destroy($id);
+
+		return redirect()->route('payments')->with('success', 'Exito: Pago eliminado!');
 	}
 
 	/**

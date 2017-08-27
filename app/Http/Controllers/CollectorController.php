@@ -27,7 +27,8 @@ class CollectorController extends Controller
 	{
 		return view('person_list',[
 			'person' => 'cobradores',
-			'people' => Collector::orderBy('name', 'asc')->get()
+			'people' => Collector::orderBy('name', 'asc')->get(),
+			'navbar' => ['', '', 'active']
 		]);
 	}
 
@@ -35,7 +36,8 @@ class CollectorController extends Controller
 	{
 		return view('create_person', [
 			'route' => 'store_collector',
-			'person' => 'Cobrador'
+			'person' => 'Cobrador',
+			'navbar' => ['', '', 'active']
 		]);
 	}
 
@@ -131,12 +133,10 @@ class CollectorController extends Controller
 	}
 
 	/**
-	 * Credit history of a client
+	 * Credits of a collector
 	 */
 	public function credits($id)
 	{
-		return view('credits', [
-			'credits' => Collector::findOrFail($id)->credits
-		]);
+		return redirect()->action('CreditController@index', ['$collector_id' => $id]);
 	}
 }

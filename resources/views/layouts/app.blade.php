@@ -32,7 +32,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Inversoft') }}
+                        <b>{{ config('app.name', 'Inversoft') }}</b>
                     </a>
                 </div>
 
@@ -40,9 +40,9 @@
                     <!-- Left Side Of Navbar -->
                     @if (Auth::check())
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{ route('home') }}">Cobro <span class="sr-only">(current)</span></a></li>
-                            <li><a href="{{ route('list_clients') }}">Clientes</a></li>
-                            <li><a href="{{ route('list_collectors') }}">Cobradores</a></li>
+                            <li class="{{ $navbar[0] }}"><a href="{{ route('home') }}">Cobro <span class="sr-only">(current)</span></a></li>
+                            <li class="{{ $navbar[1] }}"><a href="{{ route('list_clients') }}">Clientes</a></li>
+                            <li class="{{ $navbar[2] }}"><a href="{{ route('list_collectors') }}">Cobradores</a></li>
                         </ul>
 
                         <form class="navbar-form navbar-left">

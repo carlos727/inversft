@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-credit">Nuevo Credito</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-credit"><b>Nuevo Credito</b></button>
 <div class="modal fade" id="new-credit" tabindex="-1" role="dialog" aria-labelledby="creditModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

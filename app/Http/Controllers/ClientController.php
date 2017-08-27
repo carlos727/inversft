@@ -27,7 +27,8 @@ class ClientController extends Controller
 	{
 		return view('person_list',[
 			'person' => 'clientes',
-			'people' => Client::orderBy('name', 'asc')->get()
+			'people' => Client::orderBy('name', 'asc')->get(),
+			'navbar' => ['', 'active', '']
 		]);
 	}
 
@@ -35,7 +36,8 @@ class ClientController extends Controller
 	{
 		return view('create_person', [
 			'route' => 'store_client',
-			'person' => 'Cliente'
+			'person' => 'Cliente',
+			'navbar' => ['', 'active', '']
 		]);
 	}
 

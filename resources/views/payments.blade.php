@@ -30,11 +30,15 @@
 							@foreach ($payments as $payment)
 
 									<tr>
-										<td><div></div></td>
-										<td><div></div></td>
+										<td><div>{{ $payment->credit->client->name }}</div></td>
+										<td><div>{{ $payment->credit->start_at }}</div></td>
 										<td><div>{{ $payment->value }}</div></td>
 										<td><div>{{ $payment->date }}</div></td>
-										<td><div></div></td>
+										<td>
+											<div>
+												@include('common.delete_obj', ['id' => $payment->id, 'route' => 'delete_payment', 'obj' => 'pago'])
+											</div>
+										</td>
 									</tr>
 
 							@endforeach

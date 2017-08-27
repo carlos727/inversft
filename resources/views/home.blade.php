@@ -7,15 +7,18 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					@include('button.credit.new')
-
-					<a href="{{ route('create_collector') }}" class="btn btn-success">Nuevo Cobrador</a>
+					<a href="{{ route('create_collector') }}" class="btn btn-primary"><b>Nuevo Cobrador</b></a>
+					@include('button.collector.list')
+					@if (count($credits) > 0)
+						<a href="{{ $download }}" class="btn btn-primary"><b>Excel</b></a>
+					@endif
 				</div>
 
 				<div class="panel-body">
 					@include('common.errors')
 					@include('common.message')
 
-					Listado de todos los creditos activos.
+					Listado de todos los creditos activos {{ $name }}
 				</div>
 
 				@if (count($credits) > 0)
