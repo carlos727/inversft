@@ -17,11 +17,17 @@ aria-labelledby="DeleteModalLabel" aria-hidden="true">
 					{{ method_field('PUT') }}
 
 					<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-						<label for="address" class="col-md-4 control-label">Dirección</label>
+						<label for="address{{ $person->id }}" class="col-md-4 control-label">Dirección</label>
 
 						<div class="col-md-6">
-							<input id="address" type="text" class="form-control" name="address" placeholder="{{ $person->address }}"
-							value="{{ old('address') }}" required autofocus>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="address{{ $person->id }}_check" type="checkbox" name="address_check" onchange="requiredInput(this)">
+								</span>
+
+								<input id="address{{ $person->id }}" type="text" class="form-control" name="address" placeholder="{{ $person->address }}"
+								value="{{ old('address') }}" autofocus>
+							</div>
 
 							@if ($errors->has('address'))
 								<span class="help-block">
@@ -32,11 +38,17 @@ aria-labelledby="DeleteModalLabel" aria-hidden="true">
 					</div>
 
 					<div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-						<label for="phone" class="col-md-4 control-label">Telefono</label>
+						<label for="phone{{ $person->id }}" class="col-md-4 control-label">Telefono</label>
 
 						<div class="col-md-6">
-							<input id="phone" type="text" class="form-control" name="phone" placeholder="{{ $person->phone }}"
-							value="{{ old('phone') }}" required autofocus>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input id="phone{{ $person->id }}_check" type="checkbox" name="phone_check" onchange="requiredInput(this)">
+								</span>
+
+								<input id="phone{{ $person->id }}" type="text" class="form-control" name="phone" placeholder="{{ $person->phone }}"
+								value="{{ old('phone') }}" autofocus>
+							</div>
 
 							@if ($errors->has('phone'))
 								<span class="help-block">

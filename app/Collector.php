@@ -12,7 +12,7 @@ class Collector extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'id', 'name', 'address', 'phone',
+		'id', 'name', 'address', 'phone', 'active',
 	];
 
 	/**

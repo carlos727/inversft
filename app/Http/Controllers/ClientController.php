@@ -77,7 +77,9 @@ class ClientController extends Controller
 		$client->phone	= $request->input('phone');
 		$client->save();
 
-		return redirect()->route('create_credit')->with('success', 'Exito: Cliente creado!')->with('id', intval($request->input('id')));
+		return redirect()->route('create_credit')
+							->with('success', 'Exito: Cliente creado!')
+							->with('id', intval($request->input('id')));
 	}
 
 	/**
@@ -92,7 +94,8 @@ class ClientController extends Controller
 			return redirect()->action('ClientController@show')->with('success', 'Exito: Cliente eliminado!');
 		}
 		else {
-			return redirect()->action('ClientController@show')->with('warning', 'Alerta: El cliente tiene creditos asociados.');
+			return redirect()->action('ClientController@show')
+								->with('alert', 'Error: El cliente tiene creditos asociados.');
 		}
 	}
 
@@ -102,21 +105,29 @@ class ClientController extends Controller
 	public function update($id, Request $request)
 	{
 		$client = Client::findOrFail($id);
+		$fields = [];
 
-		$validator = Validator::make($request->all(), [
-			'address'	=>	'required|string|max:50',
-			'phone'		=>	'required|numeric'
-		]);
+		if ($request->input('address_check')) {
+			$fields['address'] = 'required|string|max:50';
+		}
 
-		$validator->after(function ($validator) {
+		if ($request->input('phone_check')) {
+			$fields['phone'] = 'required|numeric';
+		}
 
-			$phone = array_get($validator->getData(), 'phone', null);
+		$validator = Validator::make($request->all(), $fields);
 
-			if (!(strlen($phone) == 7 || strlen($phone) == 10)) {
-				$validator->errors()->add('phone', 'Formato de numero telefonico incorrecto.');
-			}
+		if ($request->input('phone_check')) {
+			$validator->after(function ($validator) {
 
-		});
+				$phone = array_get($validator->getData(), 'phone', null);
+
+				if (!(strlen($phone) == 7 || strlen($phone) == 10)) {
+					$validator->errors()->add('phone', 'Formato de numero telefonico incorrecto.');
+				}
+
+			});
+		}
 
 		if ($validator->fails()) {
 			return redirect()
@@ -125,11 +136,22 @@ class ClientController extends Controller
 				->withErrors($validator->errors());
 		}
 
-		$client->address= $request->input('address');
-		$client->phone	= $request->input('phone');
+		if ($request->input('address_check')) {
+			$client->address= $request->input('address');
+		}
+
+		if ($request->input('phone_check')) {
+			$client->phone	= $request->input('phone');
+		}
+
 		$client->save();
 
-		return redirect()->route('list_clients')->with('success', 'Exito: Datos del cliente actualizados!');
+		if ($request->input('address_check') || $request->input('phone_check')) {
+			return redirect()->route('list_clients')->with('success', 'Exito: Datos del cliente actualizados!');
+		} else {
+			return redirect()->route('list_clients');
+		}
+
 	}
 
 	/**

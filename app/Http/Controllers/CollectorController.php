@@ -77,7 +77,9 @@ class CollectorController extends Controller
 		$client->phone	= $request->input('phone');
 		$client->save();
 
-		return redirect()->route('list_collectors')->with('success', 'Exito: Cobrador creado!')->with('id', intval($request->input('id')));
+		return redirect()->route('list_collectors')
+							->with('success', 'Exito: Cobrador creado!')
+							->with('id', intval($request->input('id')));
 	}
 
 	/**
@@ -92,7 +94,8 @@ class CollectorController extends Controller
 			return redirect()->action('CollectorController@show')->with('success', 'Exito: Cobrador eliminado!');
 		}
 		else {
-			return redirect()->action('CollectorController@show')->with('warning', 'Alerta: El cobrador tiene creditos asociados.');
+			return redirect()->action('CollectorController@show')
+								->with('alert', 'Error: El cobrador tiene creditos asociados.');
 		}
 	}
 
@@ -101,22 +104,30 @@ class CollectorController extends Controller
 	 */
 	public function update($id, Request $request)
 	{
-		$client = collector::findOrFail($id);
+		$collector = Collector::findOrFail($id);
+		$fields = [];
 
-		$validator = Validator::make($request->all(), [
-			'address'	=>	'required|string|max:50',
-			'phone'		=>	'required|numeric'
-		]);
+		if ($request->input('address_check')) {
+			$fields['address'] = 'required|string|max:50';
+		}
 
-		$validator->after(function ($validator) {
+		if ($request->input('phone_check')) {
+			$fields['phone'] = 'required|numeric';
+		}
 
-			$phone = array_get($validator->getData(), 'phone', null);
+		$validator = Validator::make($request->all(), $fields);
 
-			if (!(strlen($phone) == 7 || strlen($phone) == 10)) {
-				$validator->errors()->add('phone', 'Formato de numero telefonico incorrecto.');
-			}
+		if ($request->input('phone_check')) {
+			$validator->after(function ($validator) {
 
-		});
+				$phone = array_get($validator->getData(), 'phone', null);
+
+				if (!(strlen($phone) == 7 || strlen($phone) == 10)) {
+					$validator->errors()->add('phone', 'Formato de numero telefonico incorrecto.');
+				}
+
+			});
+		}
 
 		if ($validator->fails()) {
 			return redirect()
@@ -125,11 +136,22 @@ class CollectorController extends Controller
 				->withErrors($validator->errors());
 		}
 
-		$client->address= $request->input('address');
-		$client->phone	= $request->input('phone');
-		$client->save();
+		if ($request->input('address_check')) {
+			$collector->address= $request->input('address');
+		}
 
-		return redirect()->route('list_collectors')->with('success', 'Exito: Datos del cobrador actualizados!');
+		if ($request->input('phone_check')) {
+			$collector->phone	= $request->input('phone');
+		}
+
+		$collector->save();
+
+		if ($request->input('address_check') || $request->input('phone_check')) {
+			return redirect()->route('list_collectors')->with('success', 'Exito: Datos del cobrador actualizados!');
+		} else {
+			return redirect()->route('list_collectors');
+		}
+
 	}
 
 	/**
@@ -138,5 +160,23 @@ class CollectorController extends Controller
 	public function credits($id)
 	{
 		return redirect()->action('CreditController@index', ['$collector_id' => $id]);
+	}
+
+	/**
+	 * Change status of a collector
+	 */
+	public function change_status($id)
+	{
+		$collector = Collector::findOrFail($id);
+
+		if ($collector->credits->where('active', 1)->count() > 0) {
+			return redirect()->action('CollectorController@show')
+								->with('alert', 'Error: El cobrador tiene creditos asociados.');
+		}
+
+		$collector->active = !$collector->active;
+		$collector->save();
+
+		return redirect()->route('list_collectors')->with('success', 'Exito: Estado del cobrador actualizado!');
 	}
 }

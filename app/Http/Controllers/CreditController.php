@@ -43,7 +43,7 @@ class CreditController extends Controller
 		return view('home',[
 			'credits' 	=> $credits,
 			'clients' 	=> Client::all(),
-			'collectors'=> Collector::all(),
+			'collectors'=> Collector::where('active', 1)->get(),
 			'navbar'	=> ['active', '', ''],
 			'name'		=> $name,
 			'download'	=> route('download_credits', ['collector_id' => $collector_id])
@@ -52,15 +52,16 @@ class CreditController extends Controller
 
 	public function create()
 	{
-		if (Collector::all()->isNotEmpty()) {
+		if (Collector::where('active', 1)->isNotEmpty()) {
 			return view('credit', [
 				'clients'	=> Client::orderBy('name', 'asc')->get(),
-				'collectors'=> Collector::orderBy('name', 'asc')->get(),
+				'collectors'=> Collector::where('active', 1)->orderBy('name', 'asc')->get(),
 				'navbar'	=> ['active', '', '']
 			]);
 		}
 		else {
-			return redirect()->action('CreditController@index')->with('alert', 'Error: No hay cobradores registrados para asignar creditos.');
+			return redirect()->action('CreditController@index')
+								->with('alert', 'Error: No hay cobradores habilitados para tener creditos.');
 		}
 	}
 

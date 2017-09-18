@@ -56,6 +56,7 @@ Route::delete('/payment/{id}/delete', 'PaymentController@delete')->name('delete_
 Route::get('/collector/show', 'CollectorController@show')->name('list_collectors');
 Route::get('/collector/create', 'CollectorController@create')->name('create_collector');
 Route::get('/collector/{id}/credits', 'CollectorController@credits')->name('credits_collector');
+Route::get('/collector/{id}/status', 'CollectorController@change_status')->name('change_status_collector');
 Route::post('/collector/store', 'CollectorController@store')->name('store_collector');
 Route::delete('/collector/{id}/delete', 'CollectorController@delete')->name('delete_collector');
 Route::put('/collector/{id}/update', 'CollectorController@update')->name('update_collector');

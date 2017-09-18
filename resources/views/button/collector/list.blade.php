@@ -7,10 +7,21 @@
 
 	<ul class="dropdown-menu">
 
+		<li>
+			<a href="{{ route('home') }}">
+				Todos  <span class="badge">{{ count($credits) }}</span>
+			</a>
+		</li>
+
 		@foreach ($collectors as $collector)
+
+			<li role="separator" class="divider"></li>
 			<li>
-				<a href="{{ route('credits_collector', ['id' => $collector->id]) }}">{{ $collector->name }}</a>
+				<a href="{{ route('credits_collector', ['id' => $collector->id]) }}">
+					{{ $collector->name }}  <span class="badge">{{ $collector->credits->where('active', 1)->count() }}</span>
+				</a>
 			</li>
+
 		@endforeach
 
 	</ul>

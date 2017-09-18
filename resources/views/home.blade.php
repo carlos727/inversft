@@ -23,7 +23,7 @@
 
 				@if (count($credits) > 0)
 
-					<table class="table table-hover">
+					<table id="table-home" class="table table-hover">
 						<thead>
 							<tr>
 								<th data-field="name">Deudor</th>
@@ -46,8 +46,9 @@
 									<td>
 										<div>
 											@include('common.delete_obj', ['id' => $credit->id,'route' => 'delete_credit','obj' => 'crédito'])
-											@include('button.credit.update', ['credit' => $credit, 'clients' => $clients])
+											<!-- @include('button.credit.update', ['credit' => $credit, 'clients' => $clients]) -->
 											@include('button.credit.pay', ['credit' => $credit])
+											@include('button.credit.payments', ['credit' => $credit])
 										</div>
 									</td>
 								</tr>

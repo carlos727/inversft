@@ -18,6 +18,7 @@ class CreateCollectorsTable extends Migration
 			$table->string('name', 50);
 			$table->string('address', 50);
 			$table->string('phone', 10);
+			$table->boolean('active')->default(1);
 			$table->timestamps();
 		});
 	}

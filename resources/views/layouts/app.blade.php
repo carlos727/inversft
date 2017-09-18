@@ -90,5 +90,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/myself.js') }}"></script>
 </body>
 </html>

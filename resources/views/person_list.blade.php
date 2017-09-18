@@ -37,12 +37,17 @@
 										<td><div>{{ $p->phone }}</div></td>
 										<td>
 											<div>
-												@if ($person == 'Clientes')
-													@include('common.delete_obj',['id' => $p->id, 'route' => 'delete_client', 'obj' => 'cliente'])
+												@if ($person == 'clientes')
+													@include('common.delete_obj',[
+														'id' => $p->id, 'route' => 'delete_client', 'obj' => 'cliente'
+													])
 													@include('common.update_per', ['person' => $p, 'route' => 'update_client'])
 												@else
-													@include('common.delete_obj',['id' => $p->id, 'route' => 'delete_collector', 'obj' => 'cobrador'])
+													@include('common.delete_obj',[
+														'id' => $p->id, 'route' => 'delete_collector', 'obj' => 'cobrador'
+													])
 													@include('common.update_per', ['person' => $p, 'route' => 'update_collector'])
+													@include('button.collector.change_status', ['id' => $p->id])
 												@endif
 											</div>
 										</td>
