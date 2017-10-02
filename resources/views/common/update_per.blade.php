@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update{{ $person->id }}">A</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update{{ $person->id }}" data-placement="top" title="Actualizar datos">A</button>
 
 <div class="modal fade" id="update{{ $person->id }}" tabindex="-1" role="dialog"
 aria-labelledby="DeleteModalLabel" aria-hidden="true">

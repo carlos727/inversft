@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{ $id }}">E</button>
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{ $id }}" data-placement="top" title="Eliminar {{ $obj }}">E</button>
 
 <div class="modal fade" id="delete{{ $id }}" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

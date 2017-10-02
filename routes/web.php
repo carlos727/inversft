@@ -53,7 +53,7 @@ Route::delete('/payment/{id}/delete', 'PaymentController@delete')->name('delete_
 /**
  * Collector routes
  */
-Route::get('/collector/show', 'CollectorController@show')->name('list_collectors');
+Route::get('/collector/show/{active?}', 'CollectorController@show')->name('list_collectors');
 Route::get('/collector/create', 'CollectorController@create')->name('create_collector');
 Route::get('/collector/{id}/credits', 'CollectorController@credits')->name('credits_collector');
 Route::get('/collector/{id}/status', 'CollectorController@change_status')->name('change_status_collector');

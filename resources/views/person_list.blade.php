@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ 	@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -13,6 +13,9 @@
 
 				<div class="panel-body">
 					Listado de todos los {{ $person }} que ha tenido la inversión
+					@if ($person != 'clientes')
+						@include('button.collector.status')
+					@endif
 				</div>
 
 				@if (count($people) > 0)
@@ -41,12 +44,16 @@
 													@include('common.delete_obj',[
 														'id' => $p->id, 'route' => 'delete_client', 'obj' => 'cliente'
 													])
-													@include('common.update_per', ['person' => $p, 'route' => 'update_client'])
+													@include('common.update_per', [
+														'person' => $p, 'route' => 'update_client'
+													])
 												@else
 													@include('common.delete_obj',[
 														'id' => $p->id, 'route' => 'delete_collector', 'obj' => 'cobrador'
 													])
-													@include('common.update_per', ['person' => $p, 'route' => 'update_collector'])
+													@include('common.update_per', [
+														'person' => $p, 'route' => 'update_collector'
+													])
 													@include('button.collector.change_status', ['id' => $p->id])
 												@endif
 											</div>

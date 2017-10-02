@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#status{{ $id }}"><b>H</b></button>
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#status{{ $id }}" data-placement="top" title="Habilitar/Inhabilitar cobrador"><b>H</b></button>
 <div class="modal fade" id="status{{ $id }}" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

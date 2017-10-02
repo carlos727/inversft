@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#pay{{ $credit->id }}">P</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#pay{{ $credit->id }}" data-placement="top" title="Pagar cuota">P</button>
 
 <div class="modal fade" id="pay{{ $credit->id }}" tabindex="-1" role="dialog"
 aria-labelledby="DeleteModalLabel" aria-hidden="true">
@@ -21,8 +21,7 @@ aria-labelledby="DeleteModalLabel" aria-hidden="true">
 						<label for="value" class="col-md-4 control-label">Cantidad</label>
 
 						<div class="col-md-6">
-							<input id="value" type="number" class="form-control" name="value" placeholder="{{ $credit->fee_val() }}"
-							value="{{ old('value') }}" required autofocus>
+							<input id="value" type="number" class="form-control" name="value" placeholder="{{ $credit->fee_val() }}" value="{{ old('value') }}" step="{{ $credit->fee_val() }}" required autofocus>
 
 							@if ($errors->has('value'))
 								<span class="help-block">

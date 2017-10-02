@@ -52,7 +52,7 @@ class CreditController extends Controller
 
 	public function create()
 	{
-		if (Collector::where('active', 1)->isNotEmpty()) {
+		if (Collector::where('active', 1)->get()->isNotEmpty()) {
 			return view('credit', [
 				'clients'	=> Client::orderBy('name', 'asc')->get(),
 				'collectors'=> Collector::where('active', 1)->orderBy('name', 'asc')->get(),

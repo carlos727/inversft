@@ -68,8 +68,7 @@
 							<label for="value" class="col-md-4 control-label">Cantidad</label>
 
 							<div class="col-md-6">
-								<input id="value" type="number" class="form-control" name="value" placeholder="50000" step="50000"
-								value="{{ old('value') }}" required autofocus>
+								<input id="value" type="number" class="form-control" name="value" placeholder="50000" step="50000" value="{{ old('value') }}" required autofocus>
 
 								@if ($errors->has('value'))
 									<span class="help-block">
@@ -83,7 +82,7 @@
 							<label for="fee" class="col-md-4 control-label">No. de cuotas</label>
 
 							<div class="col-md-6">
-								<input id="fee" type="number" class="form-control" name="fee" placeholder="30" value="{{ old('fee') }}" required autofocus>
+								<input id="fee" type="number" class="form-control" name="fee" placeholder="30" step="5" value="{{ old('fee') }}" required autofocus>
 
 								@if ($errors->has('fee'))
 									<span class="help-block">

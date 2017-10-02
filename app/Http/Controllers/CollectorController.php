@@ -23,12 +23,15 @@ class CollectorController extends Controller
 	/**
 	 * Show collector list.
 	 */
-	public function show()
+	public function show($active = 1)
 	{
+		$collectors = Collector::where('active', $active)->orderBy('name', 'asc')->get();
+
 		return view('person_list',[
-			'person' => 'cobradores',
-			'people' => Collector::orderBy('name', 'asc')->get(),
-			'navbar' => ['', '', 'active']
+			'person' 	=> 'cobradores',
+			'people' 	=> $collectors,
+			'navbar' 	=> ['', '', 'active'],
+			'collectors'=> Collector::all()
 		]);
 	}
 

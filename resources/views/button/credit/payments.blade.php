@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payments{{ $credit->id }}">Pagos</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payments{{ $credit->id }}" data-placement="top" title="Historial de pagos">H</button>
 
 <div class="modal fade" id="payments{{ $credit->id }}" tabindex="-1" role="dialog"
 aria-labelledby="DeleteModalLabel" aria-hidden="true">
@@ -30,8 +30,8 @@ aria-labelledby="DeleteModalLabel" aria-hidden="true">
 						@endforeach
 
 						<tr>
-							<td><div>Total</div></td>
-							<td><div>{{ $credit->total_paid() }}</div></td>
+							<td><div><b>Total</b></div></td>
+							<td><div><b>{{ $credit->total_paid() }}</b></div></td>
 						</tr>
 
 					</tbody>
