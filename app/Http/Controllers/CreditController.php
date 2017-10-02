@@ -223,15 +223,14 @@ class CreditController extends Controller
 				]);
 			}
 
-			Excel::create('Cobro_'.Collector::findOrFail($collector_id)->name, function($excel) use($data) {
+			Excel::create('Cobro_'.Collector::findOrFail($collector_id)->name.'_'.Carbon::now()->toDateString(),
 
-			    $excel->sheet('Creditos Activos', function($sheet) use($data) {
+				function($excel) use($data)
+				{
+					$excel->sheet('Creditos Activos', function($sheet) use($data) {	$sheet->fromArray($data); });
+				}
 
-					$sheet->fromArray($data);
-
-				});
-
-			})->export('xlsx');
+			)->export('xlsx');
 		}
 	}
 }
